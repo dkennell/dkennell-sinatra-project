@@ -61,7 +61,7 @@ class FansController < ApplicationController
         if !@fan.comedians.include?(@comedian)
           @comedian.fans << @fan
         end
-        redirect '/'
+        redirect "/comedians/#{@comedian.slug}"
     end
     
     post '/fans/withdraw_fanhood' do 
@@ -69,7 +69,7 @@ class FansController < ApplicationController
         @comedian = Comedian.find(params[:comedian_id])
         @fan.comedians.delete(Comedian.find(@comedian.id))
         @comedian.fans.delete(Fan.find(@fan.id))
-        redirect '/'
+        redirect "comedians/#{@comedian.slug}"
     end
     
     get '/fans/:slug' do
