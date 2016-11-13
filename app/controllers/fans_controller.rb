@@ -17,11 +17,16 @@ class FansController < ApplicationController
     end
     
     post '/fans/signup' do
-        @fan = Fan.create(params)
-        session[:id] = @fan.id
-        session[:type] = "fan"
-        binding.pry
-        redirect "/fans/#{@fan.slug}"
+        @fan = Fan.new(params)
+        if @fan.valid?
+          @fan.save
+          session[:id] = @fan.id
+          session[:type] = "fan"
+          redirect "/fans/#{@fan.slug}"
+        else
+          @error_handling = true
+          erb :'/fans/signup'
+        end
     end
     
     get '/fans/login' do 
