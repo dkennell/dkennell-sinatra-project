@@ -1,0 +1,53 @@
+<h3>Edit <%=@comedian.name%>s page:</h3>
+<br></br>
+
+<form method="POST" action="/comedians/:slug/edit">
+    
+    <input type="hidden" name="_method" value="PATCH"
+    
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" value="<%=@comedian.username%>">
+    <br></br>
+    
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" value="<%=@comedian.password%>">
+    <br></br>
+    <br></br>
+    
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="<%=@comedian.name%>">
+    <br></br>
+    
+    <label for="bio">Bio</label>
+    <input type="textarea" id="bio" name="bio" value="<%=@comedian.bio%>">
+    <br></br>
+
+    <h2>Cds</h2>
+    <% @comedian.cds.all.each do |cd| %>
+    <p><%=cd.name%></p>
+    <a href="/cds/<%=cd.slug%>/delete">Delete</a>
+    <br></br>
+    <% end %>
+    <br></br>
+    
+    <h5>Add a new CD</h5>
+    <label for="new_cd">New CD name:</label>
+    <input type="text" name="cd" id="new_cd">
+    <br></br>
+    
+    <h2>Specials</h2>
+    <% @comedian.specials.all.each do |special| %>
+    <p><%=special.name%></p>
+    <a href="/specials/<%=special.slug%>/delete">Delete</a>
+    <br></br>
+    <% end %>
+    <br></br>
+    
+    <h5>Add a new special</h5>
+    <label for="new_special">New Special name:</label>
+    <input type="text" name="special" id="new_special">
+    <br></br>
+    
+    <input type="submit">
+    
+</form>

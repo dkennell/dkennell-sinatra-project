@@ -1,0 +1,61 @@
+<h1>Comedy Connection</h1>
+<% binding.pry %>
+<% if @own_page %>
+<a href="/comedians/:slug/edit">Edit Page</a>
+<% elsif session[:type] == "comedian" %>
+<a href="/comedians/<%=Comedian.find(session[:id]).slug%>">Return to Homepage</a>
+<% elsif session[:type] =="fan" %>
+<a href="/fans/<%=Fan.find(session[:id]).slug%>">Return to Homepage</a>
+<% end %>
+<br></br>
+
+<a href="/comedians">All Comedians</a>
+
+<% if @own_page %>
+<h3>Welcome to your page, <%=@comedian.name%>!</h3>
+<a href="/logout">Log Out</a>
+<% end %>
+<br></br>
+
+<h1><%=@comedian.name%></h1>
+
+<% if session[:type] == "fan" && Fan.find(session[:id]).comedians.include?(@comedian)%>
+  <h3>You're a fan of <%=@comedian.name%>!<h3>
+      <form method="post" action="/fans/withdraw_fanhood">
+    <input type="hidden" value="<%=@comedian.id%>" name="comedian_id">
+    <input type="submit" value="Stop Being a Fan">
+  </form>
+<% elsif session[:type] == "fan" %>
+  <form method="post" action="/fans/become_fan">
+    <input type="hidden" value="<%=@comedian.id%>" name="comedian_id">
+    <input type="submit" value="Become a Fan">
+  </form>
+<% end %>
+
+<h2>Bio</h2>
+<p><%=@comedian.bio%></p>
+<br></br>
+
+<h2>CDs</h2>
+  <% @comedian.cds.all.each do |cd| %>
+  <a href="/cds/<%=cd.slug%>"><%=cd.name%></a>
+  <br></br>
+  <% end %>
+
+<h2>Specials</h2>
+  <% @comedian.specials.all.each do |special| %>
+  <a href="/specials/<%=special.slug%>"><%=special.name%></a>
+  <br></br>
+  <% end %>
+  
+<br></br>
+<br></br>
+
+<h2>Fans</h2>
+  <% @comedian.fans.each do |fan| %>
+  <a href="/fans/<%=fan.slug%>"><%=fan.name%></a>
+  <br></br>
+  <%end%>
+
+<br></br>
+<br></br>

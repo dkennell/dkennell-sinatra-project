@@ -1,0 +1,10 @@
+<% if session[:type] == "comedian" %>
+<a href="/comedians/<%=Comedian.find(session[:id]).slug%>">Return to Homepage</a>
+<% else %>
+<a href="/fans/<%=Fan.find(session[:id]).slug%>">Return to Homepage</a>
+<% end %>
+<h1>All Comedians</h1>
+<% Comedian.all.each do |comedian| %>
+<a href="comedians/<%=comedian.slug%>"><%=comedian.name%></a>
+<br></br>
+<% end %>

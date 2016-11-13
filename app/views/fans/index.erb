@@ -1,0 +1,7 @@
+<a href="fans/<%=Fan.find(session[:id]).slug%>">Return to Homepage</a>
+
+<h1>All Fans</h1>
+<% Fan.all.each do |fan| %>
+<a href="fans/<%=fan.slug%>"><%=fan.name%></a>
+<br></br>
+<% end %>

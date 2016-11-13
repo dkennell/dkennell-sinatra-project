@@ -1,0 +1,8 @@
+<h3>Cd name:</h3>
+<%=@cd.name%></p>
+<br></br>
+
+<h3>Comedian:</h3>
+<a href="/comedians/<%=Comedian.find(@cd.comedian_id).slug%>"><%=Comedian.find(@cd.comedian_id).name%></p>
+<br></br>
+
