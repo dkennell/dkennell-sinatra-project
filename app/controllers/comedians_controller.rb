@@ -13,11 +13,17 @@ class ComediansController < ApplicationController
       end
     end
     
-    post '/comedians/signup' do 
-        @comedian = Comedian.create(params)
-        session[:id] = @comedian.id
-        session[:type] = "comedian"
-        redirect "/comedians/#{@comedian.slug}"
+    post '/comedians/signup' do
+        @comedian = Comedian.new(params)
+        if @comedian.valid?
+          @comedian.save
+          session[:id] = @comedian.id
+          session[:type] = "comedian"
+          redirect "/comedians/#{@comedian.slug}"
+        else
+          @error_handling = true
+          erb :'/comedians/signup'
+        end
     end
        
      get '/comedians/login' do 

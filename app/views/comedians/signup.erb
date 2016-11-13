@@ -3,6 +3,14 @@
 <h3>You can add more information later!</h3>
 <br></br>
 
+<% if @error_handling %>
+  <h2>Sorry, there were a few problems with your sign-in.</h2>
+  <% @comedian.errors.messages.each do |message| %>
+  <p><%=message[0].to_s%> <%=message[1][0]%></p>
+  <%end%>
+  <br></br>
+<%end%>
+
 <form method="POST" action="/comedians/signup">
     
     <label for="username">Username</label>

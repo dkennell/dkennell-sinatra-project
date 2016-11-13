@@ -49,7 +49,6 @@ class FansController < ApplicationController
         @fan = Fan.find(session[:id])
         @comedian = Comedian.find(params[:comedian_id])
         if !@fan.comedians.include?(@comedian)
-          @fan.comedians << @comedian
           @comedian.fans << @fan
         end
         redirect '/'
