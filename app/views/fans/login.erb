@@ -2,6 +2,12 @@
 <h3>Log in below:</h3>
 <br></br>
 
+<%if @failed_login%>
+<h3>There was a problem with your login.</h3>
+<h3>Please double check your username and password.</h3>
+<br></br>
+<%end%>
+
 <form method="POST" action="/fans/login">
     
     <label for="username">Username</label>

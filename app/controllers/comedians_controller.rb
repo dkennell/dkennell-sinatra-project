@@ -32,9 +32,14 @@ class ComediansController < ApplicationController
     
     post '/comedians/login' do
         @comedian = Comedian.find_by(params)
+          if @comedian == nil
+              @failed_login = true
+              erb :'/comedians/login'
+          else
         session[:id] = @comedian.id
         session[:type] = "comedian"
         redirect "comedians/#{@comedian.slug}"
+          end
     end
 
     get '/comedians/:slug' do

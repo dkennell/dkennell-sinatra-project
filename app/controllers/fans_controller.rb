@@ -40,14 +40,19 @@ class FansController < ApplicationController
     
     post '/fans/login' do 
         @fan = Fan.find_by(:username => params[:username], :password => params[:password])
-        session[:id] = @fan.id
-        session[:type] = "fan"
-        if session[:id] == @fan.id
-            @own_page = true
+        if @fan == nil
+            @failed_login = true
+            erb :'/fans/login'
         else
+          session[:id] = @fan.id
+          session[:type] = "fan"
+          if session[:id] == @fan.id
+            @own_page = true
+          else
             @own_page = false
-        end
+          end
         redirect "/fans/#{@fan.slug}"
+        end
     end
     
     post '/fans/become_fan' do
