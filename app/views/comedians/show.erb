@@ -1,5 +1,4 @@
 <h1>Comedy Connection</h1>
-<% binding.pry %>
 <% if @own_page %>
 <a href="/comedians/:slug/edit">Edit Page</a>
 <% elsif session[:type] == "comedian" %>
@@ -52,7 +51,7 @@
 <br></br>
 
 <h2>Fans</h2>
-  <% @comedian.fans.each do |fan| %>
+  <% @comedian.fans.all.each do |fan| %>
   <a href="/fans/<%=fan.slug%>"><%=fan.name%></a>
   <br></br>
   <%end%>

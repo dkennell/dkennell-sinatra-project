@@ -1,12 +1,20 @@
 <h1>Comedy Connection</h1>
+
 <% if @own_page %>
-<h3>Welcome to your page, <%=@fan.name%>!</h3>
-<a href="/logout">Log Out</a>
+  <h3>Welcome to your page, <%=@fan.name%>!</h3>
+  <a href="/logout">Log Out</a>
 <% else %>
-<h3><%=@fan.name%></h3>
-<a href="/fans/<%=Fan.find(session[:id]).slug%>">Return to My Homepage</a>
+  <h3><%=@fan.name%></h3>
+  <a href="/fans/<%=Fan.find(session[:id]).slug%>">Return to My Homepage</a>
 <% end %>
+
 <br></br>
 <h3>Favorite Comedians</h3>
+  <% @fan.comedians.each do |comedian| %>
+  <a href="/comedians/<%=comedian.slug%>"><%=comedian.name%></a>
+  <br></br>
+  <%end%>
+<br></br>
+
 <a href="/fans">All Fans</a>
 <a href="/comedians">All Comedians</a>
